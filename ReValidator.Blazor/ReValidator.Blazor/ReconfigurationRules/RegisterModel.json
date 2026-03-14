@@ -1,0 +1,65 @@
+[
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.RegisterModel",
+    "Expression": "m => !string.IsNullOrWhiteSpace(m.Username)",
+    "RuleName": "UsernameRequired",
+    "PropertyName": "Username",
+    "ErrorMessage": "Username is required."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.RegisterModel",
+    "Expression": "m => string.IsNullOrWhiteSpace(m.Username) || (m.Username.Length >= 3 && m.Username.Length <= 20)",
+    "RuleName": "UsernameLength",
+    "PropertyName": "Username",
+    "ErrorMessage": "Username must be between 3 and 20 characters."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.RegisterModel",
+    "Expression": "m => !string.IsNullOrWhiteSpace(m.Email)",
+    "RuleName": "EmailRequired",
+    "PropertyName": "Email",
+    "ErrorMessage": "Email is required."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.RegisterModel",
+    "Expression": "m => string.IsNullOrWhiteSpace(m.Email) || m.Email.Contains(\"@\")",
+    "RuleName": "EmailFormat",
+    "PropertyName": "Email",
+    "ErrorMessage": "Email must be a valid email address."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.RegisterModel",
+    "Expression": "m => !string.IsNullOrWhiteSpace(m.Password)",
+    "RuleName": "PasswordRequired",
+    "PropertyName": "Password",
+    "ErrorMessage": "Password is required."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.RegisterModel",
+    "Expression": "m => string.IsNullOrWhiteSpace(m.Password) || m.Password.Length >= 8",
+    "RuleName": "PasswordMinLength",
+    "PropertyName": "Password",
+    "ErrorMessage": "Password must be at least 8 characters."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.RegisterModel",
+    "Expression": "m => m.Password == m.ConfirmPassword",
+    "RuleName": "ConfirmPasswordMatch",
+    "PropertyName": "ConfirmPassword",
+    "ErrorMessage": "Passwords do not match."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.RegisterModel",
+    "Expression": "m => m.Age >= 18 && m.Age <= 120",
+    "RuleName": "AgeRange",
+    "PropertyName": "Age",
+    "ErrorMessage": "Age must be between 18 and 120."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.RegisterModel",
+    "Expression": "m => m.AcceptTerms",
+    "RuleName": "TermsAccepted",
+    "PropertyName": "AcceptTerms",
+    "ErrorMessage": "You must accept the terms and conditions."
+  }
+]

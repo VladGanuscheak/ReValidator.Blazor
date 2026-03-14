@@ -9,11 +9,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ReValidator.BlazorAdapter\ReValidator.BlazorAdapter.csproj" />
-    <ProjectReference Include="..\ReValidator.Shared\ReValidator.Shared.csproj" />
+    <ProjectReference Include="..\ReValidator.Shared\Blazor.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Content Update="ReconfigurationRules\**\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ReValidator" Version="1.0.1" />
+    <PackageReference Include="ReValidator.Validation.MinimalApi" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

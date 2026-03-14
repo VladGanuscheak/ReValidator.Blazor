@@ -28,7 +28,7 @@ public static class ServerValidationInterop
         if (response.IsSuccessStatusCode)
             return true;
 
-        if (response.StatusCode == System.Net.HttpStatusCode.FailedDependency)
+        if (response.StatusCode == System.Net.HttpStatusCode.UnprocessableEntity)
         {
             try
             {

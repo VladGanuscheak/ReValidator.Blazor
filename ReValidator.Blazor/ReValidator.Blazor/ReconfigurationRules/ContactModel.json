@@ -1,0 +1,44 @@
+[
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.ContactModel",
+    "Expression": "m => !string.IsNullOrWhiteSpace(m.Name)",
+    "RuleName": "NameRequired",
+    "PropertyName": "Name",
+    "ErrorMessage": "Name is required."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.ContactModel",
+    "Expression": "m => string.IsNullOrWhiteSpace(m.Name) || m.Name.Length >= 2",
+    "RuleName": "NameMinLength",
+    "PropertyName": "Name",
+    "ErrorMessage": "Name must be at least 2 characters."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.ContactModel",
+    "Expression": "m => !string.IsNullOrWhiteSpace(m.Email)",
+    "RuleName": "EmailRequired",
+    "PropertyName": "Email",
+    "ErrorMessage": "Email is required."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.ContactModel",
+    "Expression": "m => string.IsNullOrWhiteSpace(m.Email) || m.Email.Contains(\"@\")",
+    "RuleName": "EmailFormat",
+    "PropertyName": "Email",
+    "ErrorMessage": "Email must be a valid email address."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.ContactModel",
+    "Expression": "m => !string.IsNullOrWhiteSpace(m.Message)",
+    "RuleName": "MessageRequired",
+    "PropertyName": "Message",
+    "ErrorMessage": "Message is required."
+  },
+  {
+    "FullPathToModel": "ReValidator.Shared.Models.ContactModel",
+    "Expression": "m => string.IsNullOrWhiteSpace(m.Message) || m.Message.Length >= 10",
+    "RuleName": "MessageMinLength",
+    "PropertyName": "Message",
+    "ErrorMessage": "Message must be at least 10 characters."
+  }
+]

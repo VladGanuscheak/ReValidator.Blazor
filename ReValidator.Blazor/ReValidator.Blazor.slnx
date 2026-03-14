@@ -1,6 +1,5 @@
 <Solution>
-  <Project Path="ReValidator.Api/ReValidator.Api.csproj" />
   <Project Path="ReValidator.Blazor/ReValidator.Blazor.csproj" />
   <Project Path="ReValidator.BlazorAdapter/ReValidator.BlazorAdapter.csproj" />
-  <Project Path="ReValidator.Shared/ReValidator.Shared.csproj" />
+  <Project Path="ReValidator.Shared/Blazor.Shared.csproj" />
 </Solution>
