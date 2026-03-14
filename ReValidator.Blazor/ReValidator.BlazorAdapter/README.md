@@ -6,7 +6,8 @@ A Blazor adapter for the [ReValidator](https://www.nuget.org/packages/ReValidato
 - Integrates ReValidator with Blazor's `EditForm`.
 - Supports model and field-level validation.
 - Works with dependency injection for validator resolution.
-- Compatible with .NET 10 and C# 14.0.
+- Merges server-side RFC 7807 validation errors into the form via `ServerValidationInterop`.
+- Compatible with .NET 10.
 
 ## Installation
 
@@ -21,36 +22,64 @@ A Blazor adapter for the [ReValidator](https://www.nuget.org/packages/ReValidato
 
 ## Usage
 
-1. Wrap your `EditForm` with the `ReValidatorComponent<TModel>` in your Blazor page/component:
-   ```razor
-   @using ReValidator.BlazorAdapter
-   @inject IServiceProvider ServiceProvider
-
-   <EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
-       <ReValidatorComponent TModel="ContactModel" />
-       <!-- form fields -->
-   </EditForm>
-   ```
-2. Ensure your validator is registered for the model type.
-
-## Example
-```csharp
-// In Program.cs or Startup.cs
-builder.Services.AddScoped<IValidator<ContactModel>, ContactModelValidator>();
-```
+Place `ReValidatorComponent<TModel>` inside an `EditForm`. The component resolves `IServiceProvider` internally — no extra injection is required.
 
 ```razor
-<EditForm Model="@contact" OnValidSubmit="OnSubmit">
+@using ReValidator.BlazorAdapter
+
+<EditForm EditContext="editContext" OnValidSubmit="HandleValidSubmit">
     <ReValidatorComponent TModel="ContactModel" />
-    <InputText @bind-Value="contact.Name" />
-    <ValidationMessage For="@(() => contact.Name)" />
+
+    <InputText @bind-Value="model.Name" />
+    <ValidationMessage For="() => model.Name" />
+
     <button type="submit">Submit</button>
 </EditForm>
+
+@code {
+    private ContactModel model = new();
+    private EditContext editContext = null!;
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(model);
+    }
+}
+```
+
+## Server-Side Validation
+
+`ServerValidationInterop.HandleResponse` merges errors from an HTTP **422 Unprocessable Entity** response (RFC 7807 `ValidationProblem`) into the form's `ValidationMessageStore`, so server errors appear alongside client errors.
+
+```razor
+@code {
+    private ValidationMessageStore serverMessageStore = null!;
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(model);
+        serverMessageStore = new ValidationMessageStore(editContext);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        serverMessageStore.Clear();
+        editContext.NotifyValidationStateChanged();
+
+        var response = await Http.PostAsJsonAsync("/api/contact", model);
+        var body = await response.Content.ReadAsStringAsync();
+
+        if (ServerValidationInterop.HandleResponse(response, body, editContext, serverMessageStore))
+        {
+            // success
+        }
+    }
+}
 ```
 
 ## Requirements
 - .NET 10.0 or later
-- Blazor (Server or WebAssembly)
+- Blazor Server (Interactive Server rendering)
 - [ReValidator](https://www.nuget.org/packages/ReValidator)
 
 ## License

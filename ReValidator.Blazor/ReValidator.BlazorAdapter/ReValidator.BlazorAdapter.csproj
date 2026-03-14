@@ -4,6 +4,23 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>ReValidator.BlazorAdapter</PackageId>
+    <Title>ReValidator.BlazorAdapter</Title>
+    <Version>1.0.0</Version>
+    <Authors>Ganușceac Vlad</Authors>
+    <Product>ReValidator.BlazorAdapter</Product>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Description>ReValidator.BlazorAdapter integrates the ReValidator validation library with Blazor's EditForm system.
+
+Drop ReValidatorComponent&lt;TModel&gt; inside any EditForm to get model and field-level validation powered by ReValidator, with full dependency-injection support. Includes ServerValidationInterop for merging RFC 7807 server-side validation errors into the client form.</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/VladGanuscheak/ReValidator.Blazor.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>validation;blazor;editform;revalidator</PackageTags>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +29,21 @@
 
   <ItemGroup>
     <PackageReference Include="ReValidator" Version="1.0.1" />
-  </ItemGroup>  
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\license.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
