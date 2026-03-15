@@ -1,4 +1,4 @@
-namespace ReValidator.Shared.Models;
+namespace Blazor.Shared.Models;
 
 public class RegisterModel
 {

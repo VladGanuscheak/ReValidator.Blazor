@@ -1,10 +1,10 @@
 using ReValidator;
 using ReValidator.Blazor.Components;
-using ReValidator.Shared.Models;
-using ReValidator.Shared;
 using System.Text.Json;
 using ReValidator.Contracts;
 using ReValidator.Validation.MinimalApi;
+using Blazor.Shared.Models;
+using ReValidator.SetUp;
 
 var builder = WebApplication.CreateBuilder(args);
 
